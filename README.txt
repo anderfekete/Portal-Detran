@@ -1,4 +1,4 @@
--Como iniciar o sistme-
+-Como iniciar o sistema-
 
 Lista de bibliotecas e/ou frameworks utilizados
 DotNet Core 2.2
