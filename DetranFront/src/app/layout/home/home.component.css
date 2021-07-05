@@ -1,0 +1,12 @@
+header{
+    height: 70px;
+}
+
+.navbar {
+    height: 50px;
+    background: linear-gradient(
+90deg
+, #fff 10%, #034EA2 90%);
+    padding: 0;
+}
+

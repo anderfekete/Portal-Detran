@@ -1,0 +1,61 @@
+<div class="loginPage row">
+    <div class="col-2">
+        <img src="./assets/imagens/logo.png" class="centerImg">
+    </div>
+
+    <div class="row content">
+
+        <div class="col-md-12">
+            <h2>Login</h2>
+            <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="email">E-mail</label>
+                        <div class="input-group form-group ">
+                            <input for="email" id="email" name="usu_c_email" class="form-control"
+                                [(ngModel)]="service.formData.usu_c_email" type="email" required email>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label> Senha </label>
+                        <div class="input-group form-group ">
+                            <input name="usu_c_senha" type='password' class="form-control"
+                                [(ngModel)]="service.formData.usu_c_senha" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-blue" type="submit" [disabled]="form.invalid">Entrar</button>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button class="lbl link btn btn-color text-color-bg btn-lg btn-block" type="button"
+                                [routerLink]="['/create-account']" routerLinkActive='active'>
+                                Registrar Usuario
+                                <i class="far fa-compass"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    <footer id="footer">
+        <hr style="margin-top: 32px;">
+        <div>
+            <div class="text-color-bg align-left"> Detran - Departamento Estadual de Trânsito </div>
+            <div style="clear: both;"></div>
+        </div>
+    </footer>
+
+
+    </div>
+
+
+
+
+

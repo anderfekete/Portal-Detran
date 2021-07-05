@@ -1,0 +1,51 @@
+<div class="create-account">
+    <h1>Cadastro de Usuário</h1>
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Nome</label>
+                <div class="input-group form-group ">
+                    <input name="usu_c_nome" class="form-control"
+                           [(ngModel)]="service.formData.usu_c_nome" [(ngModel)]="service.formData.usu_c_nome" required >                   
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <label for="email">E-mail (Este e-mail será usado para fazer login no sistema)</label>
+                <div class="input-group form-group ">
+                    <input for="email" id="email" name="usu_c_email" class="form-control"
+                           [(ngModel)]="service.formData.usu_c_email" type="email" required email>                   
+                </div>
+            </div>
+            <div class="col-md-12">    
+                <label class=" text-danger"> A Senha deverá conter ao menos um caracter especial, uma letra maiuscula, uma letra minuscula e no minimo 8 caracteres</label>
+
+            </div>
+
+            <div class="col-md-6">    
+                <label> Senha </label>
+                <div class="input-group form-group ">
+                    <input name="usu_c_senha" type='password' class="form-control"
+                           [(ngModel)]="service.formData.usu_c_senha" required>            
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label>Confirme a senha</label>
+                <div class="input-group form-group">
+                    <input name="pwdRepeat" type='password' class="form-control"
+                        [(ngModel)]="pwdRepeat"required>
+                </div>
+
+            </div>
+
+        </div>
+
+    
+        <div class="form-group">
+            <button class="btn btn-blue" type="submit" [disabled]='form.invalid'>
+                Cadastrar
+            </button>
+        </div>
+    </form>
+</div>

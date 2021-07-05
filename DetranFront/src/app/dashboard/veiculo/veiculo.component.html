@@ -1,0 +1,80 @@
+<div class="create-account">
+    <h1>Cadastro de Veículo</h1>
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="Digite a placa" name="placaBuscar" type="text" mask="AAA-0A00" class="form-control"
+                    [(ngModel)]="placaBuscar" required>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-blue" (click)="Buscar()">Busca Veículo</button>
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-warning" (click)="Limpar()">Limpar Campos</button>
+        </div>
+        
+    </div>
+
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Modelo</label>
+                <div class="input-group form-group ">
+                    <input name="vei_c_modelo" class="form-control" [(ngModel)]="service.formData.vei_c_modelo"
+                        [(ngModel)]="service.formData.vei_c_modelo" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Marca</label>
+                <div class="input-group form-group ">
+                    <input name="vei_c_modelo" class="form-control" [(ngModel)]="service.formData.vei_c_marca"
+                        [(ngModel)]="service.formData.vei_c_marca" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Placa</label>
+                <div class="input-group form-group ">
+                    <input name="vei_c_placa" class="form-control" type="text" mask="AAA-0A00" [(ngModel)]="service.formData.vei_c_placa"
+                        [(ngModel)]="service.formData.vei_c_placa" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Cor</label>
+                <div class="input-group form-group ">
+                    <input name="vei_c_cor" class="form-control" [(ngModel)]="service.formData.vei_c_cor"
+                        [(ngModel)]="service.formData.vei_c_cor" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Ano de Fabricação</label>
+                <div class="input-group form-group ">
+                    <input name="vei_c_anoFabricacao" class="form-control"
+                        [(ngModel)]="service.formData.vei_c_anoFabricacao"
+                        [(ngModel)]="service.formData.vei_c_anoFabricacao" required>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-success" type="submit" [disabled]='form.invalid'>
+                   {{service.formData.vei_n_codigo == 0 ? "Adicionar Veículo" : "Atualizar Veiculo"}}
+                </button>
+            </div>
+            <div class="col-md-3" *ngIf="service.formData.vei_n_codigo != 0">
+                <button class="btn btn-danger" type="button" (click)="onDelete()">
+                    Excluir Veículo
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    
+
+</div>

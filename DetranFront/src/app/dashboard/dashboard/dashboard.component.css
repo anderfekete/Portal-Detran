@@ -1,0 +1,25 @@
+.content{
+    margin-left: 100px;
+
+}
+
+.serv{
+width: 300px;
+height: 200px;
+
+background: -webkit-gradient(linear, left top, left bottom, from(#034EA2), to(rgba(3, 78, 162, 0.51)));
+background: linear-gradient(
+180deg
+, #034EA2 0%, rgba(3, 78, 162, 0.51) 100%);
+border: none;
+border-radius: 20px;
+color: #fff;
+margin-bottom: 15px;
+}
+
+.btn-dash{
+    width: 80%;
+margin-left: 10%;
+position: relative;
+top: 50%;
+}
