@@ -30,6 +30,9 @@ Update-Database
 
 Explicação de como rodar o front
 Na pasta raiz executar o comando npm install – Restaura as dependências e as ferramentas de um projeto.
+Important! Na pasta global no arquivo GlobalVar, é indispesavel que a porta da api esteja atualizada conforme a porta utilizada na API auterando o rootURL,
+por padrão ela esta da seguinte forma:
+public rootURL:string = 'https://localhost:44307/api';
 
 Ao executar a API e o Front é necessario realizar um cadastro de usuario (Esta aberto para cadastro apenas para testes)
 Preencha os campos e cadastre o usuario e a senha
