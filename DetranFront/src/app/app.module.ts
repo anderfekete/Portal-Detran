@@ -24,6 +24,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { DatePipe } from '@angular/common';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,13 +49,11 @@ import { DatePipe } from '@angular/common';
     ToastrModule.forRoot(), // ToastrModule added
     NgxMaskModule.forRoot()
   ],
-  providers: [GlobalVar,DatePipe,
+  providers: [GlobalVar, DatePipe,
     {provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true},
-  
   ],
-  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

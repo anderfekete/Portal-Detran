@@ -48,21 +48,21 @@ namespace DetranCors.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_condutor",
+                name: "Condutor",
                 columns: table => new
                 {
-                    con_n_codigo = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    con_c_nome = table.Column<string>(nullable: true),
-                    con_c_cpf = table.Column<string>(nullable: true),
-                    con_c_telefone = table.Column<string>(nullable: true),
-                    con_c_email = table.Column<string>(nullable: true),
-                    con_c_cnh = table.Column<string>(nullable: true),
-                    con_d_nascimento = table.Column<DateTime>(nullable: false)
+                    Nome = table.Column<string>(nullable: true),
+                    CPF = table.Column<string>(nullable: true),
+                    Telefone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    CNH = table.Column<string>(nullable: true),
+                    Nascimento = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_condutor", x => x.con_n_codigo);
+                    table.PrimaryKey("PK_Condutor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,6 +188,33 @@ namespace DetranCors.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Venda",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdVeiculo = table.Column<int>(nullable: false),
+                    IdCondutor = table.Column<int>(nullable: false),
+                    Data = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Venda", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Venda_Condutor_IdCondutor",
+                        column: x => x.IdCondutor,
+                        principalTable: "Condutor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Venda_tbl_veiculo_IdVeiculo",
+                        column: x => x.IdVeiculo,
+                        principalTable: "tbl_veiculo",
+                        principalColumn: "vei_n_codigo",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -226,6 +253,16 @@ namespace DetranCors.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Venda_IdCondutor",
+                table: "Venda",
+                column: "IdCondutor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Venda_IdVeiculo",
+                table: "Venda",
+                column: "IdVeiculo");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -246,16 +283,19 @@ namespace DetranCors.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "tbl_condutor");
-
-            migrationBuilder.DropTable(
-                name: "tbl_veiculo");
+                name: "Venda");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Condutor");
+
+            migrationBuilder.DropTable(
+                name: "tbl_veiculo");
         }
     }
 }

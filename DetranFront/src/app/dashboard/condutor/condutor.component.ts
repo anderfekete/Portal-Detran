@@ -1,8 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CondutorService } from 'src/app/shared/condutor/condutor.service';
+import { VeiculoData } from 'src/app/shared/veiculo/veiculo-data';
+import { VeiculoService } from 'src/app/shared/veiculo/veiculo.service';
 
 @Component({
   selector: 'app-condutor',
@@ -10,79 +13,101 @@ import { CondutorService } from 'src/app/shared/condutor/condutor.service';
   styleUrls: ['./condutor.component.css']
 })
 export class CondutorComponent implements OnInit {
-  cpfBuscar:string ="";
+  cpfBuscar = '';
+  public Veiculos: VeiculoData[] | undefined;
+
   constructor(public service: CondutorService,
-    public router: Router, 
-    public toastr: ToastrService, ) { }
+              public veiculoService: VeiculoService,
+              public router: Router,
+              public toastr: ToastrService,
+              private datePipe: DatePipe ) { }
 
   ngOnInit(): void {
+    this.Limpar();
   }
 
+  // tslint:disable-next-line:typedef
   resetForm(form?: NgForm) {
-    if (form != null)
+    if (form != null) {
       form.form.reset();
-    this.service.formData = {
-      con_n_codigo: 0,
-      con_c_nome: '',
-      con_c_cpf: '',
-      con_c_telefone: '',
-      con_c_email:"",
-      con_c_cnh: "",
-      con_d_nascimento:''
-      
     }
+
+    this.service.formData = {
+      id: 0,
+      nome: '',
+      cpf: '',
+      telefone: '',
+      email: '',
+      cnh: '',
+      nascimento: ''
+    };
   }
 
-  Buscar(){
+  Buscar(): void{
     this.service.find(this.cpfBuscar).subscribe((res: any) => {
+      debugger
       this.service.formData = res;
-    },err => {
-      this.toastr.error(err,"Registro não encontrado!");
-    })
+      this.service.formData.nascimento = this.datePipe.transform(this.service.formData.nascimento, 'yyyy-MM-dd');
+      this.BuscarVeiculos(this.service.formData.id);
+    }, (err: string | undefined) => {
+      this.toastr.error(err, 'Registro não encontrado!');
+    });
   }
 
-  Limpar(){
+  BuscarVeiculos(id: number): void{
+    this.veiculoService.getListByConductor(id).subscribe((res: VeiculoData[]) => {
+      this.Veiculos = res;
+    }, (err: string | undefined) => {
+      this.toastr.error(err, 'Erro ao carregar Veículos!');
+    });
+  }
+
+  Limpar(): void{
     this.resetForm();
-    this.cpfBuscar = "";
+    this.cpfBuscar = '';
+    this.Veiculos = undefined;
   }
 
-  onDelete() {
-    if(confirm("Deseja mesmo deletar este processo?")){
-      this.service.delete(this.service.formData.con_n_codigo).subscribe((res: any) => {
-          if(res['status']=='success'){
-            this.toastr.show("Deletado","Sucesso!");
+  onDelete(): void {
+    if (confirm('Deseja mesmo deletar este processo?')){
+      this.service.delete(this.service.formData.id).subscribe((res: any) => {
+          if (res.status === 'success'){
+            this.toastr.show('Deletado', 'Sucesso!');
             this.toastr.success('Condutor removido com sucesso!', 'Condutor Removido!');
             this.resetForm();
           }
           else{
-            this.toastr.error("Erro ao deletar","Erro!");
+            this.toastr.error('Erro ao deletar', 'Erro!');
           }
         },
-        err => {
-          this.toastr.error('erro!',"Algo deu errado: ");
+        () => {
+          this.toastr.error('erro!', 'Algo deu errado: ');
         }
-      );   
-    }    
+      );
+    }
   }
 
-  onSubmit(form: NgForm) {
-    this.service.register().subscribe((res: any) => {
+  onSubmit(form: NgForm): void {
 
-        if(res['status'] == 'success'){
+    this.service.register().subscribe((res: any) => {
+        if (res.status === 'success'){
           this.resetForm(form);
-          this.toastr.success(res['content']);
+          this.toastr.success(res.content);
         }
-        else if(res['status'] == 'already_registered'){
-          this.toastr.warning("Este CPF já esta cadastrada");
-        }  
+        else if (res.status === 'already_registered'){
+          this.toastr.warning('Este CPF já esta cadastrada');
+        }
       },
 
-      err => {
-        debugger
-
-        this.toastr.error(err,"Algo deu errado:");
+      (      err: string | undefined) => {
+        this.toastr.error(err, 'Algo deu errado:');
       }
     );
+  }
+
+  CalcularIdade(nascimento: Date): void{
+
+    const hoje = new Date();
   }
 }
 

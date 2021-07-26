@@ -1,16 +1,21 @@
 <header>
-    <nav class="navbar fixed-top navbar-dark bg-primary">
-        <img src="./assets/imagens/logo.png" [routerLink]="['']" routerLinkActive='active' class="centerImg">
-
-    </nav>
+  <nav class="navbar fixed-top navbar-dark bg-primary">
+    <img
+      src="./assets/imagens/logo.png"
+      [routerLink]="['']"
+      routerLinkActive="active"
+      class="centerImg"
+    />
+    <button class="btn btn-danger btn-logout" type="button" (click)="Logout()">
+      Sair
+    </button>
+  </nav>
 </header>
-<section>
-    <main class="container">
-        <router-outlet></router-outlet>
 
-    </main>
+<section>
+  <main class="container">
+    <router-outlet></router-outlet>
+  </main>
 </section>
 
-<footer class="mt-2 p-2 text-center">
-
-</footer>
+<footer class="mt-2 p-2 text-center"></footer>

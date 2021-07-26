@@ -10,38 +10,38 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DetranCors.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20210705130055_Start")]
+    [Migration("20210719131659_Start")]
     partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DetranCors.Data.tbl_condutor", b =>
+            modelBuilder.Entity("DetranCors.Data.Condutor", b =>
                 {
-                    b.Property<int>("con_n_codigo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("con_c_cnh");
+                    b.Property<string>("CNH");
 
-                    b.Property<string>("con_c_cpf");
+                    b.Property<string>("CPF");
 
-                    b.Property<string>("con_c_email");
+                    b.Property<string>("Email");
 
-                    b.Property<string>("con_c_nome");
+                    b.Property<DateTime>("Nascimento");
 
-                    b.Property<string>("con_c_telefone");
+                    b.Property<string>("Nome");
 
-                    b.Property<DateTime>("con_d_nascimento");
+                    b.Property<string>("Telefone");
 
-                    b.HasKey("con_n_codigo");
+                    b.HasKey("Id");
 
-                    b.ToTable("tbl_condutor");
+                    b.ToTable("Condutor");
                 });
 
             modelBuilder.Entity("DetranCors.Data.tbl_veiculo", b =>
@@ -63,6 +63,28 @@ namespace DetranCors.Migrations
                     b.HasKey("vei_n_codigo");
 
                     b.ToTable("tbl_veiculo");
+                });
+
+            modelBuilder.Entity("DetranCors.Model.Venda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Data")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<int>("IdCondutor");
+
+                    b.Property<int>("IdVeiculo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCondutor");
+
+                    b.HasIndex("IdVeiculo");
+
+                    b.ToTable("Venda");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -228,6 +250,19 @@ namespace DetranCors.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("DetranCors.Model.Venda", b =>
+                {
+                    b.HasOne("DetranCors.Data.Condutor", "tbl_condutor")
+                        .WithMany("Venda")
+                        .HasForeignKey("IdCondutor")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DetranCors.Data.tbl_veiculo", "tbl_veiculo")
+                        .WithMany("Venda")
+                        .HasForeignKey("IdVeiculo")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

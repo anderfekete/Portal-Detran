@@ -1,1 +1,103 @@
-<p>venda works!</p>
+<div class="create-account">
+  <h1>Registro de Venda</h1>
+  <hr>
+  <label>
+    Dados do Veículo
+  </label>
+  <div class="row">
+      <div class="col-md-6">
+          <div class="input-group form-group ">
+              <input placeholder="Busca por CPF" type="text" mask="000.000.000-00"  name="cpfBuscar" class="form-control"
+                  [(ngModel)]="cpfBuscar">
+          </div>
+      </div>
+
+      <div class="col-md-3">
+          <button type="button" class="btn btn-blue" (click)="BuscarCondutor()">Buscar Condutor</button>
+      </div>
+  </div>
+
+  <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="input-group form-group ">
+                  <input placeholder="Nome" readonly name="Nome" class="form-control" [(ngModel)]="condutorService.formData.nome">
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="E-mail" readonly name="Email" class="form-control" type="email" [(ngModel)]="condutorService.formData.email">
+            </div>
+        </div>
+
+          <div class="col-md-4">
+              <div class="input-group form-group ">
+                  <input placeholder="CNH" readonly name="CNH" class="form-control" [(ngModel)]="condutorService.formData.cnh">
+              </div>
+          </div>
+
+          <div class="col-md-4">
+              <div class="input-group form-group ">
+                  <input placeholder="Telefone" readonly name="Telefone" class="form-control" type="text" mask="(00) 0000-00000" [(ngModel)]="condutorService.formData.telefone">
+              </div>
+          </div>
+
+          <div class="col-md-4">
+              <div class="input-group form-group ">
+                  <input placeholder="Data de nascimento" readonly name="Nascimento" class="form-control" type="date" [(ngModel)]="condutorService.formData.nascimento">
+              </div>
+          </div>
+      </div>
+      <hr>
+      <label>
+        Dados do Veículo
+      </label>
+      <div class="row">
+        <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="Digite a placa" name="placaBuscar" type="text" mask="AAA-0A00" class="form-control"
+                    [(ngModel)]="placaBuscar">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <button type="button" class="btn btn-blue" (click)="BuscarVeiculo()">Busca Veículo</button>
+        </div>
+
+    </div>
+      <div class="row">
+        <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="Modelo" readonly name="modelo" class="form-control"
+                  [(ngModel)]="veiculoService.formData.modelo" >
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="Marca" readonly name="modelo" class="form-control"
+                  [(ngModel)]="veiculoService.formData.marca">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="Cor" readonly name="cor" class="form-control"
+                    [(ngModel)]="veiculoService.formData.cor">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group form-group ">
+                <input placeholder="Ano de Fabricação" readonly name="veiculoService.anoFabricacao" class="form-control"
+                    [(ngModel)]="veiculoService.formData.anoFabricacao">
+            </div>
+        </div>
+    </div>
+      <div class="row">
+          <div class="col-md-3">
+              <button class="btn btn-success" type="submit" [disabled]='form.invalid'>
+                 Registrar Venda
+              </button>
+          </div>
+      </div>
+  </form>
+
+</div>

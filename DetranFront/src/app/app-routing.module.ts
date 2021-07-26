@@ -14,23 +14,23 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children:[  
-      {path:'', redirectTo: 'dashboard', pathMatch: 'full'},
-      {path:'dashboard', component: DashboardComponent},
-      {path:'condutor', component: CondutorComponent},
-      {path:'veiculo', component: VeiculoComponent},
-      {path:'venda', component: VendaComponent},
+    children: [
+      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      {path: 'dashboard', component: DashboardComponent},
+      {path: 'condutor', component: CondutorComponent},
+      {path: 'veiculo', component: VeiculoComponent},
+      {path: 'venda', component: VendaComponent},
 
     ],
     canActivate: [AuthGuard]
   },
   {
-    path:'',
+    path: '',
     component: AuthenticationComponent,
-    children:[
-      {path:'', component: DashboardComponent},
-      {path:'login', component: LoginComponent},
-      {path:'create-account', component: CreateAccountComponent}
+    children: [
+      {path: '', component: DashboardComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'create-account', component: CreateAccountComponent}
     ]
   }
 ];

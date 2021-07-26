@@ -16,48 +16,46 @@
         <div class="col-md-3">
             <button class="btn btn-warning" (click)="Limpar()">Limpar Campos</button>
         </div>
-        
+
     </div>
 
     <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
         <div class="row">
             <div class="col-md-6">
-                <label>Nome</label>
                 <div class="input-group form-group ">
-                    <input name="con_c_nome" class="form-control" [(ngModel)]="service.formData.con_c_nome" required>
+                    <input placeholder="Nome" name="Nome" class="form-control" [(ngModel)]="service.formData.nome" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label>CPF</label>
                 <div class="input-group form-group ">
-                    <input name="con_c_cpf" class="form-control" type="text" mask="000.000.000-00" maxlength="15" min="15"[(ngModel)]="service.formData.con_c_cpf" required>
+                    <input placeholder="CPF" name="CPF" class="form-control" type="text" mask="000.000.000-00" maxlength="15" min="15"[(ngModel)]="service.formData.cpf" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label>CNH</label>
                 <div class="input-group form-group ">
-                    <input name="con_c_cnh" class="form-control" [(ngModel)]="service.formData.con_c_cnh" required>
+                    <input placeholder="CNH" name="CNH" class="form-control" [(ngModel)]="service.formData.cnh" required>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label>Telefone</label>
                 <div class="input-group form-group ">
-                    <input name="con_c_telefone" class="form-control" type="text" mask="(00) 0000-00000" [(ngModel)]="service.formData.con_c_telefone" required>
+                    <input placeholder="Telefone" name="Telefone" class="form-control" type="text" mask="(00) 0000-00000" [(ngModel)]="service.formData.telefone" required>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label>E-mail</label>
                 <div class="input-group form-group ">
-                    <input name="con_c_email" class="form-control" type="email" [(ngModel)]="service.formData.con_c_email" required>
+                    <input placeholder="E-mail" name="Email" class="form-control" type="email" [(ngModel)]="service.formData.email" required>
                 </div>
             </div>
-
-            <div class="col-md-6">
-                <label>Data de nascimento</label>
+            <div class="col-md-2">
+              <div class="input-group form-group ">
+                <label>Data de Nascimento</label>
+              </div>
+          </div>
+            <div class="col-md-4">
                 <div class="input-group form-group ">
-                    <input name="con_d_nascimento" class="form-control" type="date" [(ngModel)]="service.formData.con_d_nascimento" required>
+                    <input name="Nascimento" class="form-control" type="date" [(ngModel)]="service.formData.nascimento" required>
                 </div>
             </div>
         </div>
@@ -65,10 +63,10 @@
         <div class="row">
             <div class="col-md-3">
                 <button class="btn btn-success" type="submit" [disabled]='form.invalid'>
-                   {{service.formData.con_n_codigo == 0 ? "Adicionar Condutor" : "Atualizar Condutor"}}
+                   {{service.formData.id == 0 ? "Adicionar Condutor" : "Atualizar Condutor"}}
                 </button>
             </div>
-            <div class="col-md-3" *ngIf="service.formData.con_n_codigo != 0">
+            <div class="col-md-3" *ngIf="service.formData.id != 0">
                 <button class="btn btn-danger" type="button" (click)="onDelete()">
                     Excluir Condutor
                 </button>
@@ -76,7 +74,28 @@
 
         </div>
     </form>
+    <hr>
+    <h2>Histórico de Veículos</h2>
+    <table class="table table-striped" mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
+      <thead class="thead-dark">
+        <tr>
+          <th>Placa</th>
+          <th>Modelo</th>
+          <th>Marca</th>
+          <th>Cor</th>
+          <th>Ano de Fabricação</th>
+        </tr>
 
-    
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let veiculo of Veiculos">
+          <td>{{veiculo.placa}}</td>
+          <td>{{veiculo.modelo}}</td>
+          <td>{{veiculo.marca}}</td>
+          <td>{{veiculo.cor}}</td>
+          <td>{{veiculo.anoFabricacao}}</td>
 
+        </tr>
+      </tbody>
+    </table>
 </div>

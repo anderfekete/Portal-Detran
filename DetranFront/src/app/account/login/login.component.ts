@@ -13,32 +13,33 @@ import { LoginService } from 'src/app/shared/login/login.service';
 export class LoginComponent implements OnInit {
 
   constructor(public service: LoginService,
-    public router: Router, 
-    public toastr: ToastrService, 
+              public router: Router,
+              public toastr: ToastrService,
     ) { }
 
   ngOnInit(): void {
+    this.resetForm();
   }
 
-  resetForm(form?: NgForm) {
-    if (form != null)
+  resetForm(form?: NgForm): void {
+    if (form != null) {
       form.form.reset();
+    }
     this.service.formData = {
       usu_c_email: '',
       usu_c_senha: ''
-    }
+    };
   }
 
-  onSubmit(form: NgForm) {
-    if (this.service.formData.usu_c_senha == "" || this.service.formData.usu_c_email == "") {
-      this.toastr.warning("Campos estão vazios!", "Atenção!");
+  onSubmit(form: NgForm): void {
+    if (this.service.formData.usu_c_senha === '' || this.service.formData.usu_c_email === '') {
+      this.toastr.warning('Campos estão vazios!", "Atenção!');
     }
     else {
       this.service.formData.usu_c_email = this.service.formData.usu_c_email.toLowerCase();
       this.service.postLogin().subscribe((res: any) => {
-        debugger
         sessionStorage.setItem('token', res);
-        sessionStorage.setItem("username", res.userName);
+        sessionStorage.setItem('username', res.userName);
         this.router.navigate(['']);
       },
         err => {

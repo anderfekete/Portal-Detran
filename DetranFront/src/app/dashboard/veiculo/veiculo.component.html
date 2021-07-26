@@ -16,65 +16,78 @@
         <div class="col-md-3">
             <button class="btn btn-warning" (click)="Limpar()">Limpar Campos</button>
         </div>
-        
+
     </div>
 
     <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
         <div class="row">
             <div class="col-md-6">
-                <label>Modelo</label>
                 <div class="input-group form-group ">
-                    <input name="vei_c_modelo" class="form-control" [(ngModel)]="service.formData.vei_c_modelo"
-                        [(ngModel)]="service.formData.vei_c_modelo" required>
+                    <input placeholder="Modelo" name="modelo" class="form-control"
+                        [(ngModel)]="service.formData.modelo" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Marca</label>
                 <div class="input-group form-group ">
-                    <input name="vei_c_modelo" class="form-control" [(ngModel)]="service.formData.vei_c_marca"
-                        [(ngModel)]="service.formData.vei_c_marca" required>
+                    <input placeholder="Marca"  name="modelo" class="form-control"
+                        [(ngModel)]="service.formData.marca" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Placa</label>
                 <div class="input-group form-group ">
-                    <input name="vei_c_placa" class="form-control" type="text" mask="AAA-0A00" [(ngModel)]="service.formData.vei_c_placa"
-                        [(ngModel)]="service.formData.vei_c_placa" required>
+                    <input placeholder="Placa" name="placa" class="form-control" type="text" mask="AAA-0A00"
+                        [(ngModel)]="service.formData.placa" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Cor</label>
                 <div class="input-group form-group ">
-                    <input name="vei_c_cor" class="form-control" [(ngModel)]="service.formData.vei_c_cor"
-                        [(ngModel)]="service.formData.vei_c_cor" required>
+                    <input placeholder="Cor" name="cor" class="form-control"
+                        [(ngModel)]="service.formData.cor" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Ano de Fabricação</label>
                 <div class="input-group form-group ">
-                    <input name="vei_c_anoFabricacao" class="form-control"
-                        [(ngModel)]="service.formData.vei_c_anoFabricacao"
-                        [(ngModel)]="service.formData.vei_c_anoFabricacao" required>
+                    <input placeholder="Ano de Fabricação" mask="0000" name="anoFabricacao" class="form-control"
+                        [(ngModel)]="service.formData.anoFabricacao" required>
                 </div>
             </div>
-
-        </div>
-
-        <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-success" type="submit" [disabled]='form.invalid'>
-                   {{service.formData.vei_n_codigo == 0 ? "Adicionar Veículo" : "Atualizar Veiculo"}}
-                </button>
-            </div>
-            <div class="col-md-3" *ngIf="service.formData.vei_n_codigo != 0">
-                <button class="btn btn-danger" type="button" (click)="onDelete()">
-                    Excluir Veículo
-                </button>
-            </div>
+              <label></label>
 
+              <button class="btn btn-success btn-action" type="submit" [disabled]='form.invalid'>
+                 {{service.formData.id == 0 ? "Adicionar Veículo" : "Atualizar Veiculo"}}
+              </button>
+          </div>
+
+          <div class="col-md-3" *ngIf="service.formData.id != 0">
+            <label></label>
+
+              <button class="btn btn-danger btn-action" type="button" (click)="onDelete()">
+                  Excluir Veículo
+              </button>
+          </div>
         </div>
     </form>
+    <hr>
+    <h2>Histórico de Proprietario</h2>
+    <table class="table table-striped" mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
+      <thead class="thead-dark">
+        <tr>
+          <th>Proprietario</th>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+        </tr>
 
-    
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let condutor of Condutores; index as i">
+          <td>{{i+1}}º </td>
+          <td>{{condutor.nome}}</td>
+          <td>{{condutor.email}}</td>
+          <td>{{condutor.telefone}}</td>
 
+        </tr>
+      </tbody>
+    </table>
 </div>

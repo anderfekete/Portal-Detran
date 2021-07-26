@@ -10,3 +10,8 @@ header{
     padding: 0;
 }
 
+.btn-logout{
+  position: absolute;
+  right: 10px;
+}
+

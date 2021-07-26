@@ -5,6 +5,7 @@
   ],
   "rules": {
     "align": {
+      "one-line" : false,
       "options": [
         "parameters",
         "statements"

@@ -1,4 +1,5 @@
 ﻿using DetranCors.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,16 +21,31 @@ namespace DetranCors.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("getCondutores")] 
-        public async Task<IEnumerable<tbl_condutor>> GetCondutores()
+        public async Task<IEnumerable<Condutor>> GetCondutores()
         {
-            return await _context.tbl_condutor.ToListAsync();
+            return await _context.Condutor.ToListAsync();
+        }
+
+        [HttpGet]
+        [Route("getPorVeiculo")]
+        public async Task<IEnumerable<Condutor>> getPorVeiculo(int id)
+        {
+
+            var condutores = (from venda in _context.Venda
+                              join condutor in _context.Condutor on venda.IdCondutor equals condutor.Id
+                              where venda.IdVeiculo == id
+                              select condutor).ToList();
+
+            return condutores;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<tbl_condutor>> GetCondutor(int id)
+        [Authorize]
+        public async Task<ActionResult<Condutor>> GetCondutor(int id)
         {
-            var condutor = await _context.tbl_condutor.FindAsync(id);
+            var condutor = await _context.Condutor.FindAsync(id);
 
             if (condutor == null)
             {
@@ -40,10 +56,11 @@ namespace DetranCors.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("buscar")]
-        public async Task<ActionResult<tbl_condutor>> BuscarCondutor(string cpf)
+        public async Task<ActionResult<Condutor>> BuscarCondutor(string cpf)
         {
-            var condutor = await _context.tbl_condutor.Where(x => x.con_c_cpf == cpf).FirstOrDefaultAsync();
+            var condutor = await _context.Condutor.Where(x => x.CPF == cpf).FirstOrDefaultAsync();
 
             if (condutor == null)
             {
@@ -54,14 +71,15 @@ namespace DetranCors.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("postCondutor")] //pms/auth/signup
-        public async Task<IActionResult> PostCondutor([FromBody] tbl_condutor condutor)
+        public async Task<IActionResult> PostCondutor([FromBody] Condutor condutor)
         {
             ObjectReturn objectReturn = new ObjectReturn();
 
-            if (condutor.con_n_codigo == 0)
+            if (condutor.Id == 0)
             {
-                _context.tbl_condutor.Add(condutor);
+                _context.Condutor.Add(condutor);
                 await _context.SaveChangesAsync();
                 objectReturn.content = "Condutor registrado com sucesso!";
 
@@ -75,22 +93,23 @@ namespace DetranCors.Controllers
 
 
             objectReturn.status = "success";
-            objectReturn.id = condutor.con_n_codigo;
+            objectReturn.id = condutor.Id;
 
             return Ok(objectReturn);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tbl_condutor>> DeleteCondutor(int id)
+        [Authorize]
+        public async Task<ActionResult<Condutor>> DeleteCondutor(int id)
         {
             ObjectReturn objectReturn = new ObjectReturn();
-            var condutor = await _context.tbl_condutor.FindAsync(id);
+            var condutor = await _context.Condutor.FindAsync(id);
             if (condutor == null)
             {
                 return NotFound();
             }
 
-            _context.tbl_condutor.Remove(condutor);
+            _context.Condutor.Remove(condutor);
             await _context.SaveChangesAsync();
             objectReturn.status = "success";
             return Ok(objectReturn);

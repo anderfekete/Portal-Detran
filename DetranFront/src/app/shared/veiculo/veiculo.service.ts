@@ -11,20 +11,22 @@ export class VeiculoService {
   formData: VeiculoData = new VeiculoData();
 
   constructor(public globalVar: GlobalVar,
-    public http: HttpClient,) { }
+              public http: HttpClient,) { }
   getAll(): Observable<VeiculoData[]> {
     return this.http.get<VeiculoData[]>(this.globalVar.rootURL + '/veiculo/getVeiculos');
   }
-  register() {
-    return this.http.post(this.globalVar.rootURL + "/veiculo/postVeiculo", this.formData);
-  }//register
-
-  find(placa:string) {
-    this.http.get(this.globalVar.rootURL+ '/veiculo/buscar?placa='+ placa)
-    .toPromise()
-    .then(res => this.formData = res as VeiculoData);
+  getListByConductor(id: number): Observable<VeiculoData[]> {
+    return this.http.get<VeiculoData[]>(this.globalVar.rootURL + '/veiculo/getPorCondutor?id=' + id);
   }
-  delete(id:number){
-    return this.http.delete(this.globalVar.rootURL+"/veiculo/"+id)
+  register(): any {
+    return this.http.post(this.globalVar.rootURL + '/veiculo/postVeiculo', this.formData);
+  }
+
+  find(placa: string): any {
+    return this.http.get(this.globalVar.rootURL + '/veiculo/buscar?placa=' + placa);
+  }
+
+  delete(id: number): any{
+    return this.http.delete(`${this.globalVar.rootURL}/veiculo/${id}`);
   }
 }
