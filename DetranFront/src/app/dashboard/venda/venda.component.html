@@ -1,54 +1,7 @@
 <div class="create-account">
-  <h1>Registro de Venda</h1>
-  <hr>
-  <label>
-    Dados do Veículo
-  </label>
-  <div class="row">
-      <div class="col-md-6">
-          <div class="input-group form-group ">
-              <input placeholder="Busca por CPF" type="text" mask="000.000.000-00"  name="cpfBuscar" class="form-control"
-                  [(ngModel)]="cpfBuscar">
-          </div>
-      </div>
-
-      <div class="col-md-3">
-          <button type="button" class="btn btn-blue" (click)="BuscarCondutor()">Buscar Condutor</button>
-      </div>
-  </div>
-
+  <h1>Registro de Veículo</h1>
+  <hr/>
   <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-      <div class="row">
-          <div class="col-md-6">
-              <div class="input-group form-group ">
-                  <input placeholder="Nome" readonly name="Nome" class="form-control" [(ngModel)]="condutorService.formData.nome">
-              </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group form-group ">
-                <input placeholder="E-mail" readonly name="Email" class="form-control" type="email" [(ngModel)]="condutorService.formData.email">
-            </div>
-        </div>
-
-          <div class="col-md-4">
-              <div class="input-group form-group ">
-                  <input placeholder="CNH" readonly name="CNH" class="form-control" [(ngModel)]="condutorService.formData.cnh">
-              </div>
-          </div>
-
-          <div class="col-md-4">
-              <div class="input-group form-group ">
-                  <input placeholder="Telefone" readonly name="Telefone" class="form-control" type="text" mask="(00) 0000-00000" [(ngModel)]="condutorService.formData.telefone">
-              </div>
-          </div>
-
-          <div class="col-md-4">
-              <div class="input-group form-group ">
-                  <input placeholder="Data de nascimento" readonly name="Nascimento" class="form-control" type="date" [(ngModel)]="condutorService.formData.nascimento">
-              </div>
-          </div>
-      </div>
-      <hr>
       <label>
         Dados do Veículo
       </label>
@@ -61,7 +14,11 @@
         </div>
 
         <div class="col-md-3">
-            <button type="button" class="btn btn-blue" (click)="BuscarVeiculo()">Busca Veículo</button>
+          <button type="button" class="btn btn-blue" (click)="BuscarVeiculo()">Buscar Veículo</button>
+        </div>
+
+        <div class="col-md-3">
+          <button type="button" class="btn btn-warning" (click)="Limpar()">Limpar Campos</button>
         </div>
 
     </div>
@@ -94,10 +51,18 @@
       <div class="row">
           <div class="col-md-3">
               <button class="btn btn-success" type="submit" [disabled]='form.invalid'>
-                 Registrar Venda
+                 Registrar
               </button>
           </div>
+
+          <div class="col-md-3">
+            <button class="btn btn-danger" type="button" [routerLink]="['/condutor']" routerLinkActive='active'>
+              Voltar
+            </button>
+
+          </div>
       </div>
+
   </form>
 
 </div>

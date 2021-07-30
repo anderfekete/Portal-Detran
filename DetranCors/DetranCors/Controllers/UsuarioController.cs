@@ -62,17 +62,27 @@ namespace DetranCors.Controllers
 
         [HttpPost]
         [Route("signin")]
-        public async Task<ActionResult> Login([FromBody] Usuario usuario)
+        public async Task<IActionResult> Login([FromBody] Usuario usuario)
         {
-            if (string.IsNullOrEmpty(usuario.usu_c_email) || string.IsNullOrEmpty(usuario.usu_c_email)) return BadRequest("Usuário ou senha em branco!");
-            var result = await _signInManager.PasswordSignInAsync(usuario.usu_c_email, usuario.usu_c_senha, false, true);
-
-            if (result.Succeeded)
+            ObjectReturn objectReturn = new ObjectReturn();
+            try
             {
-                return Ok(await GerarJwt(usuario.usu_c_email));
+                if (string.IsNullOrEmpty(usuario.usu_c_email) || string.IsNullOrEmpty(usuario.usu_c_email)) return BadRequest("Usuário ou senha em branco!");
+                var result = await _signInManager.PasswordSignInAsync(usuario.usu_c_email, usuario.usu_c_senha, false, true);
+
+                if (result.Succeeded)
+                {
+                    return Ok(await GerarJwt(usuario.usu_c_email));
+                }
+
+                return NotFound("Usuario ou senha inválidos");
+            }
+            catch (Exception ex)
+            {
+                objectReturn.content = ex.Message;
+                return BadRequest(objectReturn);
             }
 
-            return BadRequest("Usuario ou senha inválidos");
         }
 
         private async Task<string> GerarJwt(string email)
@@ -82,7 +92,8 @@ namespace DetranCors.Controllers
                 var userData = await _userManager.FindByNameAsync(email); //Encontra o user pelo email, na tabela aspnetUsers
                                                                           //-----------------------JWT---------------------------------------------------//
                 var key = Encoding.ASCII.GetBytes(_appSettings.Secret); //gera um código com base na tabela ASCII 
-
+                var exp = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras);
+                var now = DateTime.Now;
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Issuer = _appSettings.Emissor,
@@ -100,7 +111,7 @@ namespace DetranCors.Controllers
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }

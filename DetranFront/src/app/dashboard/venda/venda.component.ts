@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CondutorService } from 'src/app/shared/condutor/condutor.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
@@ -15,14 +15,18 @@ import { CondutorData } from 'src/app/shared/condutor/condutor-data';
 export class VendaComponent implements OnInit {
   cpfBuscar = '';
   placaBuscar = '';
+  idCondutor: number | undefined;
 
   constructor(public service: VendaService,
-              public condutorService: CondutorService,
               public veiculoService: VeiculoService,
               public router: Router,
+              private activatedRoute: ActivatedRoute,
               public toastr: ToastrService, ) { }
 
   ngOnInit(): void {
+    debugger
+    this.idCondutor = parseInt(this.activatedRoute.snapshot.paramMap.get('id') || '');
+
     this.resetForm();
   }
 
@@ -40,30 +44,24 @@ export class VendaComponent implements OnInit {
 
     }
 
-    this.condutorService.formData = {
-      id: 0,
-      nome: '',
-      cpf: '',
-      telefone: '',
-      email: '',
-      cnh: '',
-      nascimento: ''
-    };
-
     this.service.formData = {
       Id: 0,
       IdVeiculo: 0,
       IdCondutor: 0
     };
   }
+  Limpar(): void{
+    this.resetForm();
+    this.cpfBuscar = '';
+    this.veiculoService.formData = {
+      id: 0,
+      modelo: '',
+      marca: '',
+      placa: '',
+      cor: '',
+      anoFabricacao: ''
+    };  }
 
-  BuscarCondutor(): void{
-    this.condutorService.find(this.cpfBuscar).subscribe((res: any) => {
-      this.condutorService.formData = res;
-    }, (err: string | undefined) => {
-      this.toastr.error(err, 'Condutor não encontrado!');
-    });
-  }
   BuscarVeiculo(): void{
     this.veiculoService.find(this.placaBuscar).subscribe((res: any) => {
       this.veiculoService.formData = res;
@@ -74,7 +72,8 @@ export class VendaComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
 
-    this.service.formData.IdCondutor = this.condutorService.formData.id;
+    // tslint:disable-next-line:radix
+    this.service.formData.IdCondutor =  this.idCondutor != null ? this.idCondutor : 0;
     this.service.formData.IdVeiculo = this.veiculoService.formData.id;
 
     this.service.register().subscribe((res: any) => {

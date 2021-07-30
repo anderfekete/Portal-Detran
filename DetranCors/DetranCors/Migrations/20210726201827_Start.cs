@@ -66,20 +66,20 @@ namespace DetranCors.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_veiculo",
+                name: "Veiculo",
                 columns: table => new
                 {
-                    vei_n_codigo = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    vei_c_modelo = table.Column<string>(nullable: true),
-                    vei_c_marca = table.Column<string>(nullable: true),
-                    vei_c_placa = table.Column<string>(nullable: true),
-                    vei_c_cor = table.Column<string>(nullable: true),
-                    vei_c_anoFabricacao = table.Column<string>(nullable: true)
+                    Modelo = table.Column<string>(nullable: true),
+                    Marca = table.Column<string>(nullable: true),
+                    Placa = table.Column<string>(nullable: true),
+                    Cor = table.Column<string>(nullable: true),
+                    AnoFabricacao = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_veiculo", x => x.vei_n_codigo);
+                    table.PrimaryKey("PK_Veiculo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,10 +208,10 @@ namespace DetranCors.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Venda_tbl_veiculo_IdVeiculo",
+                        name: "FK_Venda_Veiculo_IdVeiculo",
                         column: x => x.IdVeiculo,
-                        principalTable: "tbl_veiculo",
-                        principalColumn: "vei_n_codigo",
+                        principalTable: "Veiculo",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -295,7 +295,7 @@ namespace DetranCors.Migrations
                 name: "Condutor");
 
             migrationBuilder.DropTable(
-                name: "tbl_veiculo");
+                name: "Veiculo");
         }
     }
 }

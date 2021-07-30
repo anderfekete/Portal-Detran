@@ -69,8 +69,7 @@ namespace DetranCors.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Data")
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime>("Data");
 
                     b.Property<int>("IdCondutor");
 

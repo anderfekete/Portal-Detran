@@ -36,7 +36,16 @@ namespace DetranCors
                (Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<DataBaseContext>().AddDefaultTokenProviders();
-
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy(
