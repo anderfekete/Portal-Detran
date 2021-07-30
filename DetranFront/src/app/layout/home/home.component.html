@@ -6,6 +6,24 @@
       routerLinkActive="active"
       class="centerImg"
     />
+
+    <div class="menu-nav">
+      <button class="btn btn-nav" type="button" [routerLink]="['']"
+      routerLinkActive="active">
+        Home
+      </button>
+      <label class="pip-nav">|</label>
+      <button class="btn btn-nav" type="button" [routerLink]="['/condutor']"
+      routerLinkActive="active">
+        Condutores
+      </button>
+      <label class="pip-nav">|</label>
+
+      <button class="btn btn-nav" type="button" [routerLink]="['/veiculo']"
+      routerLinkActive="active">
+        Veículos
+      </button>
+    </div>
     <button class="btn btn-danger btn-logout" type="button" (click)="Logout()">
       Sair
     </button>

@@ -42,10 +42,9 @@ export class VeiculoComponent implements OnInit {
   Buscar(): void{
     this.service.find(this.placaBuscar).subscribe((res: any) => {
       this.service.formData = res;
-      debugger
       this.BuscarCondutores(this.service.formData.id);
     }, (err: string | undefined) => {
-      this.toastr.error(err, 'Registro não encontrado!');
+      this.toastr.error('', 'Registro não encontrado!');
     });
   }
 
@@ -53,7 +52,7 @@ export class VeiculoComponent implements OnInit {
     this.condutorService.getListByVehicle(id).subscribe((res: any) => {
       this.Condutores = res;
     }, (err: string | undefined) => {
-      this.toastr.error(err, 'Registro não encontrado!');
+      this.toastr.error('', 'Registro não encontrado!');
     });
   }
 

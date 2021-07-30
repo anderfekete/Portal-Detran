@@ -1,0 +1,7 @@
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\appsettings.Development.json
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\appsettings.json
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\libman.json
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\DetranCors.dll
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\DetranCors.runtimeconfig.json
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\DetranCors.pdb
+C:\Users\ander\source\Portal-Detran\DetranCors\DetranCors\obj\Release\netcoreapp2.1\PubTmp\Out\DetranCors.deps.json

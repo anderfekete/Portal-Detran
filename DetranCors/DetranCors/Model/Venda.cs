@@ -14,7 +14,7 @@ namespace DetranCors.Model
         public int Id { get; set; }
         public int IdVeiculo { get; set; }
         public int IdCondutor { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [System.ComponentModel.DefaultValue(typeof(DateTime), "")]
         public DateTime Data { get; set; }
 
         [ForeignKey("IdVeiculo")]

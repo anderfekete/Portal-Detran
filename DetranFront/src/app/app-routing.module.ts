@@ -19,7 +19,7 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'condutor', component: CondutorComponent},
       {path: 'veiculo', component: VeiculoComponent},
-      {path: 'venda', component: VendaComponent},
+      {path: 'venda/:id', component: VendaComponent},
 
     ],
     canActivate: [AuthGuard]

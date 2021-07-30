@@ -15,7 +15,6 @@ export class UsuarioService {
               public http: HttpClient,) {}
 
             register() {
-              debugger
               return this.http.post(this.globalVar.rootURL + "/usuario/signup", this.formData);
-            }//register
+            }
 }

@@ -20,7 +20,9 @@ export class CondutorComponent implements OnInit {
               public veiculoService: VeiculoService,
               public router: Router,
               public toastr: ToastrService,
-              private datePipe: DatePipe ) { }
+              private datePipe: DatePipe )
+              {
+              }
 
   ngOnInit(): void {
     this.Limpar();
@@ -45,7 +47,6 @@ export class CondutorComponent implements OnInit {
 
   Buscar(): void{
     this.service.find(this.cpfBuscar).subscribe((res: any) => {
-      debugger
       this.service.formData = res;
       this.service.formData.nascimento = this.datePipe.transform(this.service.formData.nascimento, 'yyyy-MM-dd');
       this.BuscarVeiculos(this.service.formData.id);
@@ -60,6 +61,7 @@ export class CondutorComponent implements OnInit {
     }, (err: string | undefined) => {
       this.toastr.error(err, 'Erro ao carregar Veículos!');
     });
+
   }
 
   Limpar(): void{

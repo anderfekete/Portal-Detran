@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-md-3">
-            <button class="btn btn-blue" (click)="Buscar()">Busca Condutor</button>
+            <button class="btn btn-blue" (click)="Buscar()">Buscar Condutor</button>
         </div>
 
         <div class="col-md-3">
@@ -75,7 +75,18 @@
         </div>
     </form>
     <hr>
-    <h2>Histórico de Veículos</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Histórico de Veículos</h2>
+
+      </div>
+      <div class="col-md-4">
+        <div class="serv">
+            <button *ngIf="service.formData.id != 0" class="btn btn-blue" type="button" [routerLink]="['/venda', service.formData.id]" routerLinkActive='active'>Registrar Veículo</button>
+        </div>
+    </div>
+
+    </div>
     <table class="table table-striped" mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
       <thead class="thead-dark">
         <tr>

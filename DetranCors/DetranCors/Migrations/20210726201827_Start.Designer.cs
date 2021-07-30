@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DetranCors.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20210719131659_Start")]
+    [Migration("20210726201827_Start")]
     partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,25 +44,25 @@ namespace DetranCors.Migrations
                     b.ToTable("Condutor");
                 });
 
-            modelBuilder.Entity("DetranCors.Data.tbl_veiculo", b =>
+            modelBuilder.Entity("DetranCors.Data.Veiculo", b =>
                 {
-                    b.Property<int>("vei_n_codigo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("vei_c_anoFabricacao");
+                    b.Property<string>("AnoFabricacao");
 
-                    b.Property<string>("vei_c_cor");
+                    b.Property<string>("Cor");
 
-                    b.Property<string>("vei_c_marca");
+                    b.Property<string>("Marca");
 
-                    b.Property<string>("vei_c_modelo");
+                    b.Property<string>("Modelo");
 
-                    b.Property<string>("vei_c_placa");
+                    b.Property<string>("Placa");
 
-                    b.HasKey("vei_n_codigo");
+                    b.HasKey("Id");
 
-                    b.ToTable("tbl_veiculo");
+                    b.ToTable("Veiculo");
                 });
 
             modelBuilder.Entity("DetranCors.Model.Venda", b =>
@@ -71,8 +71,7 @@ namespace DetranCors.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Data")
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime>("Data");
 
                     b.Property<int>("IdCondutor");
 
@@ -259,7 +258,7 @@ namespace DetranCors.Migrations
                         .HasForeignKey("IdCondutor")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DetranCors.Data.tbl_veiculo", "tbl_veiculo")
+                    b.HasOne("DetranCors.Data.Veiculo", "tbl_veiculo")
                         .WithMany("Venda")
                         .HasForeignKey("IdVeiculo")
                         .OnDelete(DeleteBehavior.Cascade);

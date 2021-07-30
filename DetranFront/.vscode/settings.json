@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/3182945e-cb10-4667-be3b-3220db6917e0/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/detran",
+    "appService.deploySubpath": "dist\\Detran"
+}
