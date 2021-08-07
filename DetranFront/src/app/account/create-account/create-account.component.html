@@ -32,7 +32,7 @@
           />
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12">
         <label> Senha </label>
         <div class="input-group form-group">
           <input
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12">
         <label>Confirme a senha</label>
         <div class="input-group form-group">
           <input
@@ -57,20 +57,12 @@
           />
         </div>
       </div>
-
-      <div class="col-md-12">
-        <label class="text-danger">
-          A senha deverá conter ao menos um caractere especial, uma letra
-          maiúscula, uma letra minúscula e no mínimo 8 caracteres</label
-        >
-      </div>
-
-      <div class="col-md-3">
+      <div class="col-md-3 col-sm-12">
         <button class="btn btn-blue" type="submit" [disabled]="form.invalid">
           Cadastrar
         </button>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-sm-12">
         <button class="btn btn-warning" type="button" [routerLink]="['/login']" routerLinkActive='active'>
           Voltar
         </button>

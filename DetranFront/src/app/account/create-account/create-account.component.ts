@@ -13,8 +13,8 @@ import { GlobalVar } from 'src/global/globalVar';
 export class CreateAccountComponent implements OnInit {
   pwdRepeat:string = "";
   constructor(public service: UsuarioService,
-    public router: Router, 
-    public toastr: ToastrService, 
+    public router: Router,
+    public toastr: ToastrService,
     public global: GlobalVar
     ) { }
 
@@ -41,7 +41,7 @@ export class CreateAccountComponent implements OnInit {
         else{
           this.resetForm(form);
           this.toastr.success('Registro realizado com sucesso!', 'Novo usuário criado!');
-        }  
+        }
       },
 
       err => {
@@ -52,6 +52,6 @@ export class CreateAccountComponent implements OnInit {
     );
   }
 
-  
-  
+
+
 }

@@ -55,7 +55,7 @@
           </div>
             <div class="col-md-4">
                 <div class="input-group form-group ">
-                    <input name="Nascimento" class="form-control" type="date" [(ngModel)]="service.formData.nascimento" required>
+                    <input name="Nascimento" class="form-control" type="date" [(ngModel)]="service.formData.nascimento" required onchange="calcularIdade()">
                 </div>
             </div>
         </div>

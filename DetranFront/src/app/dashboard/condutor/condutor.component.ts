@@ -107,9 +107,17 @@ export class CondutorComponent implements OnInit {
     );
   }
 
-  CalcularIdade(nascimento: Date): void{
+  calcularIdade(): void{
+    debugger
+      const hoje = new Date();
+      const nascimento = new Date(this.service.formData.nascimento ? this.service.formData.nascimento : '' );
 
-    const hoje = new Date();
+      let diferencaAnos = hoje.getFullYear() - nascimento.getFullYear();
+
+      if ( new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()) <
+           new Date(hoje.getFullYear(), nascimento.getMonth(), nascimento.getDate()) )
+          diferencaAnos--;
+
   }
 }
 
